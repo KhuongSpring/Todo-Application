@@ -1,0 +1,131 @@
+h1 {
+    text-align: center;
+}
+
+.head form {
+    display: flex;
+    padding-left: 100px;
+}
+
+.head input {
+    width: 80%;
+    height: 30px;
+    border-radius: 5px;
+    border: 1px solid gainsboro;
+    padding-left: 10px;
+    margin-right: 10px;
+}
+
+.head button {
+    margin-left: 20px;
+    color: white;
+    background-color: rgb(84, 163, 253);
+    border: 0px;
+    border-radius: 5px;
+    width: 50px;
+}
+
+.todo-list {
+    padding-left: 60px;
+    width: 85%;
+}
+
+.todo-list .task {
+    display: flex;
+    border: 1px solid rgb(163, 163, 163);
+    align-items: center;
+    border-radius: 5px;
+    height: 50px;
+    margin-bottom: 10px;
+}
+
+.todo-list .content {
+    display: flex;
+    justify-content: space-between;
+    width: 95%;
+}
+
+.todo-list .task .content p {
+    padding-left: 10px;
+    color: rgb(87, 85, 85);
+}
+
+.buttonHehe {
+    padding-right: 10px;
+    display: flex;
+    align-items: center;
+}
+
+.buttonHehe form {
+    margin-left: 10px;
+}
+
+.toggle {
+    height: 30px;
+    border-radius: 5px;
+    border: 1px solid gray;
+    color: gray;
+}
+
+.delete {
+    height: 35px;
+    border: 1px solid rgb(248, 75, 75);
+    border-radius: 5px;
+    color: red;
+}
+
+.todo-list ul li {
+    list-style: none;
+}
+
+.toggle:hover {
+    color: white;
+    background-color: gray;
+    border: 1px solid gray;
+}
+
+.delete:hover {
+    color: white;
+    background-color: red;
+}
+
+.head button:hover {
+    background-color: rgb(92, 92, 253);
+}
+
+.todo-list .task-complete {
+    display: flex;
+    border: 1px solid rgb(163, 163, 163);
+    align-items: center;
+    border-radius: 5px;
+    height: 50px;
+    margin-bottom: 10px;
+    background-color: aquamarine;
+    justify-content: space-between;
+}
+
+.todo-list .task-complete .content p {
+    padding-left: 10px;
+    color: rgb(87, 85, 85);
+    text-decoration-line: line-through;
+}
+
+.menu {
+    margin-left: 100px;
+    margin-top: 10px;
+    display: flex;
+    justify-content: space-between;
+    width: 80%;
+    align-items: center;
+}
+
+.category {
+    display: inline-block;
+    width: 5%;
+    height: 70%;
+    margin-left: 10px;
+    font-weight: bold;
+    text-align: center;
+    border-radius: 10px;
+    align-content: center;
+}

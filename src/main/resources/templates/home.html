@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" th:href="@{/css/style.css}">
+<!--    <link rel="stylesheet" href="test1.css">-->
+</head>
+
+<body>
+<h1>Todo Application</h1>
+<div class="head">
+    <form th:action="@{/todo/home}" th:object="${task}" method="post">
+        <input type="text" placeholder="Add a new task..." th:field="*{taskName}">
+        <select th:field="*{categoryName}">
+            <option value="">-- Select Category --</option>
+            <option th:each="cat : ${T(com.example.pet_project.entities.Category).values()}"
+                    th:value="${cat.value}"
+                    th:text="${cat.displayName}">
+            </option>
+        </select>
+        <button type="submit">Add</button>
+    </form>
+</div>
+<div class="menu">
+    <div class="caculate">
+        <p>Tổng số công việc: <span th:text="${countTask}"></span></p>
+        <p>Số công việc đã hoàn thành: <span th:text="${countTaskCompleted}"></span></p>
+        <p>Số công việc còn lại: <span th:text="${countTaskNotCompleted}"></span></p>
+    </div>
+    <form th:action="@{/todo/home}" method="get" class="func">
+        <label for="sortBy">Sắp xếp theo: </label>
+        <select name="sortBy" id="sortBy">
+            <option value="createdAt" th:selected="${sortBy == 'createdAt'}">Thời gian tạo</option>
+            <option value="completed" th:selected="${sortBy == 'completed'}">Trạng thái</option>
+            <option value="taskName" th:selected="${sortBy == 'taskName'}">Tên công việc</option>
+        </select>
+        <select name="direction">
+            <option value="asc" th:selected="${direction == 'asc'}">Tăng dần</option>
+            <option value="desc" th:selected="${direction == 'desc'}">Giảm dần</option>
+        </select>
+        <button type="submit">Lọc</button>
+    </form>
+</div>
+<div class="todo-list">
+    <ul>
+        <li>
+            <div th:each="task : ${listTask}" th:class="${task.completed} ? 'task-complete' : 'task'">
+                <div class="category" th:text="${task.categoryName}"
+                     th:style="'background-color:' + ${task.categoryColor} + ';color:white;'"></div>
+                <div class="content">
+                    <p th:text="*{task.taskName}">Content</p>
+                    <div class="buttonHehe">
+                        <form th:action="@{/todo/toggle/{id}(id=${task.id})}" method="post">
+                            <input type="hidden" name="_method" value="PUT"/>
+                            <button class="toggle" type="submit">Toggle</button>
+                        </form>
+                        <form th:action="@{/todo/delete/{id}(id=${task.id})}" method="post">
+                            <input type="hidden" name="_method" value="DELETE"/>
+                            <button class="delete" type="submit">Delete</button>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </li>
+    </ul>
+</div>
+</body>
+
+</html>
