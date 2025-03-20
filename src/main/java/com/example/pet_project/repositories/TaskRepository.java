@@ -1,5 +1,6 @@
 package com.example.pet_project.repositories;
 
+import com.example.pet_project.entities.Category;
 import com.example.pet_project.entities.Task;
 import org.springframework.data.domain.Sort;
 import org.springframework.data.jpa.repository.JpaRepository;
@@ -14,4 +15,5 @@ public interface TaskRepository extends JpaRepository<Task, Long> {
     List<Task> findAll(Sort sort);
     Integer countTaskByCompletedTrue();
     Integer countTaskByCompletedFalse();
+    List<Task> findAllByCategory(Category category, Sort sort);
 }

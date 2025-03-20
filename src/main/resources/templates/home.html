@@ -30,19 +30,28 @@
         <p>Số công việc đã hoàn thành: <span th:text="${countTaskCompleted}"></span></p>
         <p>Số công việc còn lại: <span th:text="${countTaskNotCompleted}"></span></p>
     </div>
-    <form th:action="@{/todo/home}" method="get" class="func">
-        <label for="sortBy">Sắp xếp theo: </label>
-        <select name="sortBy" id="sortBy">
-            <option value="createdAt" th:selected="${sortBy == 'createdAt'}">Thời gian tạo</option>
-            <option value="completed" th:selected="${sortBy == 'completed'}">Trạng thái</option>
-            <option value="taskName" th:selected="${sortBy == 'taskName'}">Tên công việc</option>
-        </select>
-        <select name="direction">
-            <option value="asc" th:selected="${direction == 'asc'}">Tăng dần</option>
-            <option value="desc" th:selected="${direction == 'desc'}">Giảm dần</option>
-        </select>
-        <button type="submit">Lọc</button>
-    </form>
+    <div class="sorting">
+        <form th:action="@{/todo/home}" method="get" class="func">
+            <label for="sortBy">Sắp xếp theo: </label>
+            <select name="sortBy" id="sortBy">
+                <option value="createdAt" th:selected="${sortBy == 'createdAt'}">Thời gian tạo</option>
+                <option value="completed" th:selected="${sortBy == 'completed'}">Trạng thái</option>
+                <option value="taskName" th:selected="${sortBy == 'taskName'}">Tên công việc</option>
+            </select>
+            <select name="direction">
+                <option value="asc" th:selected="${direction == 'asc'}">Tăng dần</option>
+                <option value="desc" th:selected="${direction == 'desc'}">Giảm dần</option>
+            </select>
+            <button type="submit">Lọc</button>
+        </form>
+        <form th:action="@{/todo/sortByCategory}" method="post">
+            <button type="submit" name="category" value="study" class="btn">Học tập</button>
+            <button type="submit" name="category" value="working" class="btn">Làm việc</button>
+            <button type="submit" name="category" value="living" class="btn">Sinh hoạt</button>
+            <button type="submit" name="category" value="other" class="btn">Khác</button>
+            <button type="submit" name="category" value="reset" class="btn">Làm mới</button>
+        </form>
+    </div>
 </div>
 <div class="todo-list">
     <ul>
