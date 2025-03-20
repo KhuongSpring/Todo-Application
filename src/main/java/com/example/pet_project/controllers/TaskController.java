@@ -1,6 +1,5 @@
 package com.example.pet_project.controllers;
 
-
 import com.example.pet_project.dtos.requests.TaskRequest;
 import com.example.pet_project.dtos.responses.TaskResponse;
 import com.example.pet_project.entities.Category;
@@ -13,27 +12,30 @@ import org.modelmapper.ModelMapper;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
 
-import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
 
 @RestController
 @RequestMapping("/todo")
 @RequiredArgsConstructor
-@FieldDefaults(level = AccessLevel.PRIVATE, makeFinal = true)
+@FieldDefaults(level = AccessLevel.PRIVATE)
 public class TaskController {
 
     final
     ModelAndView modelAndView;
     final TaskService taskService;
     final ModelMapper modelMapper;
+    List<Task> tasks;
+    String categoryName = "";
 
     @GetMapping("/home")
     public ModelAndView getHome(
             @RequestParam(defaultValue = "createdAt") String sortBy,
-            @RequestParam(defaultValue = "desc") String direction) {
-
-        List<TaskResponse> taskResponses = taskService.getTask(sortBy, direction)
+            @RequestParam(defaultValue = "desc") String direction
+    ) {
+        if (categoryName.equals("")) tasks = taskService.getTask(sortBy, direction);
+        else tasks = taskService.getTaskByCategory(categoryName, sortBy, direction);
+        List<TaskResponse> taskResponses = tasks
                 .stream()
                 .map(task -> new TaskResponse(
                         task.getId(),
@@ -75,6 +77,13 @@ public class TaskController {
     public ModelAndView deleteTask(@PathVariable Long id) {
         if (taskService.deleteTask(id))
             modelAndView.setViewName("redirect:/todo/home");
+        return modelAndView;
+    }
+
+    @PostMapping("/sortByCategory")
+    public ModelAndView sortByCategory(@RequestParam("category") String categoryName) {
+        this.categoryName = categoryName;
+        modelAndView.setViewName("redirect:/todo/home");
         return modelAndView;
     }
 }

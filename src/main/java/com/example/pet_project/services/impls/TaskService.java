@@ -67,4 +67,13 @@ public class TaskService implements ITaskService {
     public int getNumberTaskNotCompleted(){
         return taskRepository.countTaskByCompletedFalse();
     }
+
+    @Override
+    public List<Task> getTaskByCategory(String categoryName, String sortBy, String direction){
+        Sort.Direction sortDirection = direction.equalsIgnoreCase("desc") ? Sort.Direction.DESC : Sort.Direction.ASC;
+        Sort sort = Sort.by(sortDirection, sortBy);
+        if (categoryName.equals("reset")) return taskRepository.findAll(sort);
+        Category category = Category.valueOf(categoryName.toUpperCase());
+        return taskRepository.findAllByCategory(category, sort);
+    }
 }

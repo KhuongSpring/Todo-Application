@@ -129,3 +129,10 @@ h1 {
     border-radius: 10px;
     align-content: center;
 }
+
+.sorting .btn {
+    margin-top: 10px;
+    background-color: #4CAF50;
+    height: 30px;
+    width: 80px;
+}
