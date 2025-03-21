@@ -11,6 +11,7 @@ public interface ITaskService {
     boolean addTask(TaskRequest request);
     boolean toggleTask(Long id);
     boolean deleteTask(Long id);
+    boolean updateTask(Long id, TaskRequest request);
     int getNumberTask();
     int getNumberTaskCompleted();
     int getNumberTaskNotCompleted();

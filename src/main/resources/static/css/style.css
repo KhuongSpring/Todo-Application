@@ -67,6 +67,13 @@ h1 {
     color: gray;
 }
 
+.update {
+    height: 32px;
+    border-radius: 5px;
+    border: 1px solid chocolate;
+    color: chocolate;
+}
+
 .delete {
     height: 35px;
     border: 1px solid rgb(248, 75, 75);
@@ -82,6 +89,12 @@ h1 {
     color: white;
     background-color: gray;
     border: 1px solid gray;
+}
+
+.update:hover {
+    color: gray;
+    background-color: bisque;
+    border: 1px solid bisque;
 }
 
 .delete:hover {
@@ -135,4 +148,50 @@ h1 {
     background-color: #4CAF50;
     height: 30px;
     width: 80px;
+}
+
+.update-info {
+    display: none;
+    /* display: block; */
+    border: 1px solid black;
+    height: 200px;
+    width: 300px;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background-color: white;
+}
+
+.update-exit {
+    margin-left: 92%;
+    background-color: red;
+    color: black;
+    border: 1px solid white;
+}
+
+.update-info-name {
+    display: flex;
+    height: 30px;
+    align-items: center;
+    margin-top: 10px;
+    width: 95%;
+    margin-left: 5px;
+}
+
+.update-info-name input {
+    margin-left: 20px;
+    border: 1px solid black;
+    border-radius: 5px;
+}
+
+.update-info .update-confirm {
+    background-color: #4CAF50;
+    border: 0px;
+    height: 30px;
+    color: white;
+    border-radius: 5px;
+    position: absolute;
+    top: 80%;
+    left: 40%;
 }
