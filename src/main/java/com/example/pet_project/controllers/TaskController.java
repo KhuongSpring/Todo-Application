@@ -83,6 +83,7 @@ public class TaskController {
     @PostMapping("/sortByCategory")
     public ModelAndView sortByCategory(@RequestParam("category") String categoryName) {
         this.categoryName = categoryName;
+        modelAndView.addObject("selectedCategory", categoryName);
         modelAndView.setViewName("redirect:/todo/home");
         return modelAndView;
     }
