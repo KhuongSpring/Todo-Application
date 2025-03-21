@@ -73,6 +73,7 @@ public class TaskController {
         return modelAndView;
     }
 
+
     @PostMapping("/update/{id}")
     public ModelAndView updateTask(@PathVariable Long id, @ModelAttribute TaskRequest request){
         if (taskService.updateTask(id, request))
@@ -90,6 +91,7 @@ public class TaskController {
     @PostMapping("/sortByCategory")
     public ModelAndView sortByCategory(@RequestParam("category") String categoryName) {
         this.categoryName = categoryName;
+        modelAndView.addObject("selectedCategory", categoryName);
         modelAndView.setViewName("redirect:/todo/home");
         return modelAndView;
     }

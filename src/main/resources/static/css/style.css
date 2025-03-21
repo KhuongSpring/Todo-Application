@@ -134,7 +134,7 @@ h1 {
 
 .category {
     display: inline-block;
-    width: 5%;
+    width: 8%;
     height: 70%;
     margin-left: 10px;
     font-weight: bold;
@@ -146,8 +146,16 @@ h1 {
 .sorting .btn {
     margin-top: 10px;
     background-color: #4CAF50;
+    border-radius: 5px;
+    border: 0px;
     height: 30px;
-    width: 80px;
+    width: 70px;
+    color: white;
+}
+
+.btn.selected {
+    background-color: #c2ff4f;
+    color: #5e5e5e;
 }
 
 .update-info {

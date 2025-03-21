@@ -6,7 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
     <link rel="stylesheet" th:href="@{/css/style.css}">
-<!--    <link rel="stylesheet" href="test1.css">-->
+    <!--    <link rel="stylesheet" href="test1.css">-->
 </head>
 
 <body>
@@ -45,10 +45,22 @@
             <button type="submit">Lọc</button>
         </form>
         <form th:action="@{/todo/sortByCategory}" method="post">
-            <button type="submit" name="category" value="study" class="btn">Học tập</button>
-            <button type="submit" name="category" value="working" class="btn">Làm việc</button>
-            <button type="submit" name="category" value="living" class="btn">Sinh hoạt</button>
-            <button type="submit" name="category" value="other" class="btn">Khác</button>
+            <button type="submit" name="category" value="study"
+                    class="btn" th:classappend="${selectedCategory == 'study' ? 'selected' : ''}">Học tập
+            </button>
+
+            <button type="submit" name="category" value="working"
+                    class="btn" th:classappend="${selectedCategory == 'working' ? 'selected' : ''}">Làm việc
+            </button>
+
+            <button type="submit" name="category" value="living"
+                    class="btn" th:classappend="${selectedCategory == 'living' ? 'selected' : ''}">Sinh hoạt
+            </button>
+
+            <button type="submit" name="category" value="other"
+                    class="btn" th:classappend="${selectedCategory == 'other' ? 'selected' : ''}">Khác
+            </button>
+
             <button type="submit" name="category" value="reset" class="btn">Làm mới</button>
         </form>
     </div>
