@@ -73,6 +73,13 @@ public class TaskController {
         return modelAndView;
     }
 
+    @PostMapping("/update/{id}")
+    public ModelAndView updateTask(@PathVariable Long id, @ModelAttribute TaskRequest request){
+        if (taskService.updateTask(id, request))
+            modelAndView.setViewName("redirect:/todo/home");
+        return modelAndView;
+    }
+
     @DeleteMapping("/delete/{id}")
     public ModelAndView deleteTask(@PathVariable Long id) {
         if (taskService.deleteTask(id))

@@ -76,11 +76,14 @@
                     <div class="buttonHehe">
                         <form th:action="@{/todo/toggle/{id}(id=${task.id})}" method="post">
                             <input type="hidden" name="_method" value="PUT"/>
-                            <button class="toggle" type="submit">Toggle</button>
+                            <button class="toggle" type="submit">Hoàn thành</button>
+                        </form>
+                        <form>
+                            <button class="update" type="submit">Chỉnh sửa</button>
                         </form>
                         <form th:action="@{/todo/delete/{id}(id=${task.id})}" method="post">
                             <input type="hidden" name="_method" value="DELETE"/>
-                            <button class="delete" type="submit">Delete</button>
+                            <button class="delete" type="submit">Xóa</button>
                         </form>
                     </div>
                 </div>
@@ -88,6 +91,32 @@
         </li>
     </ul>
 </div>
+<div th:each="task : ${listTask}">
+    <form th:action="@{/todo/update/{id}(id=${task.id})}" method="post" >
+        <div class="update-info">
+            <button class="update-exit">X</button>
+            <div class="update-info-name">
+                <p>Họ tên</p>
+                <input type="text" placeholder="Nhập tên mới..." th:field="*{task.taskName}"/>
+            </div>
+            <button type="submit" class="update-confirm">Xác nhận</button>
+        </div>
+    </form>
+</div>
+<script>
+    const updateInfo = document.querySelector(".update-info");
+    const updateBtn = document.querySelector("button.update");
+    const updateExit = document.querySelector("button.update-exit");
+    updateBtn.addEventListener("click", (e) => {
+        e.preventDefault();
+        updateInfo.style.display = "block";
+    })
+    updateExit.addEventListener("click", (e) => {
+        e.preventDefault();
+        updateInfo.style.display = "none";
+    })
+
+</script>
 </body>
 
 </html>

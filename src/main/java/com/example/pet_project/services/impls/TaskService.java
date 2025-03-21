@@ -45,6 +45,17 @@ public class TaskService implements ITaskService {
     }
 
     @Override
+    public boolean updateTask(Long id, TaskRequest request){
+        if(taskRepository.existsById(id)){
+            Task task = taskRepository.findTaskById(id);
+            task.setTaskName(request.getTaskName());
+            taskRepository.save(task);
+            return true;
+        }
+        return false;
+    }
+
+    @Override
     public boolean deleteTask(Long id){
         if (!taskRepository.existsById(id)){
             throw new RuntimeException();
