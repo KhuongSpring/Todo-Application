@@ -73,6 +73,7 @@ public class TaskController {
         return modelAndView;
     }
 
+
     @PostMapping("/update/{id}")
     public ModelAndView updateTask(@PathVariable Long id, @ModelAttribute TaskRequest request){
         if (taskService.updateTask(id, request))
