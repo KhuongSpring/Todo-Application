@@ -65,6 +65,7 @@ h1 {
     border-radius: 5px;
     border: 1px solid gray;
     color: gray;
+    margin-right: 5px;
 }
 
 .update {
@@ -159,7 +160,7 @@ h1 {
 }
 
 .update-info {
-    display: none;
+    /*display: none;*/
     /* display: block; */
     border: 1px solid black;
     height: 200px;
