@@ -1,10 +1,7 @@
 <!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org">
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
 
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
     <link rel="stylesheet" th:href="@{/css/style.css}">
     <!--    <link rel="stylesheet" href="test1.css">-->
 </head>
@@ -21,7 +18,7 @@
                     th:text="${cat.displayName}">
             </option>
         </select>
-        <button type="submit">Add</button>
+        <button type="submit">Thêm</button>
     </form>
 </div>
 <div class="menu">
@@ -67,20 +64,38 @@
 </div>
 <div class="todo-list">
     <ul>
-        <li>
-            <div th:each="task : ${listTask}" th:class="${task.completed} ? 'task-complete' : 'task'">
+        <li th:each="task, iterStat : ${listTask}">
+            <div th:class="${task.completed} ? 'task-complete' : 'task'">
                 <div class="category" th:text="${task.categoryName}"
                      th:style="'background-color:' + ${task.categoryColor} + ';color:white;'"></div>
                 <div class="content">
-                    <p th:text="*{task.taskName}">Content</p>
+                    <p th:text="${task.taskName}">Content</p>
                     <div class="buttonHehe">
                         <form th:action="@{/todo/toggle/{id}(id=${task.id})}" method="post">
                             <input type="hidden" name="_method" value="PUT"/>
                             <button class="toggle" type="submit">Hoàn thành</button>
                         </form>
-                        <form>
-                            <button class="update" type="submit">Chỉnh sửa</button>
-                        </form>
+                        <div class="update-container">
+                            <button class="update" type="button"
+                                    th:attr="onclick='toggleUpdateForm(' + ${iterStat.index} + ')'">
+                                Chỉnh sửa
+                            </button>
+                            <form th:action="@{/todo/update/{id}(id=${task.id})}" method="post"
+                                  th:id="'updateForm' + ${iterStat.index}" class="update-form" style="display: none;">
+                                <div class="update-info">
+                                    <button type="button" class="update-exit"
+                                            th:attr="onclick='toggleUpdateForm(' + ${iterStat.index} + ')'">
+                                        X
+                                    </button>
+                                    <div class="update-info-name">
+                                        <p>Họ tên</p>
+                                        <input type="text" placeholder="Nhập tên mới..."
+                                               th:name="taskName"/>
+                                    </div>
+                                    <button type="submit" class="update-confirm">Xác nhận</button>
+                                </div>
+                            </form>
+                        </div>
                         <form th:action="@{/todo/delete/{id}(id=${task.id})}" method="post">
                             <input type="hidden" name="_method" value="DELETE"/>
                             <button class="delete" type="submit">Xóa</button>
@@ -91,31 +106,11 @@
         </li>
     </ul>
 </div>
-<div th:each="task : ${listTask}">
-    <form th:action="@{/todo/update/{id}(id=${task.id})}" method="post" >
-        <div class="update-info">
-            <button class="update-exit">X</button>
-            <div class="update-info-name">
-                <p>Họ tên</p>
-                <input type="text" placeholder="Nhập tên mới..." th:field="*{task.taskName}"/>
-            </div>
-            <button type="submit" class="update-confirm">Xác nhận</button>
-        </div>
-    </form>
-</div>
 <script>
-    const updateInfo = document.querySelector(".update-info");
-    const updateBtn = document.querySelector("button.update");
-    const updateExit = document.querySelector("button.update-exit");
-    updateBtn.addEventListener("click", (e) => {
-        e.preventDefault();
-        updateInfo.style.display = "block";
-    })
-    updateExit.addEventListener("click", (e) => {
-        e.preventDefault();
-        updateInfo.style.display = "none";
-    })
-
+    function toggleUpdateForm(index) {
+        let form = document.getElementById('updateForm' + index);
+        form.style.display = (form.style.display === 'none' || form.style.display === '') ? 'block' : 'none';
+    }
 </script>
 </body>
 
